@@ -1,0 +1,229 @@
+﻿@model IEnumerable<ProjeYonetim.Models.Gorusme>
+
+@{
+    ViewBag.Title = "Randevu Al";
+}
+<style>
+    /* Buton kapsayıcı */
+    #button-container {
+        display: flex;
+        flex-wrap: wrap; /* Butonlar genişlik yetmezse alt satıra geçebilir */
+        justify-content: center; /* Butonları yatay olarak ortala */
+        gap: 10px; /* Butonlar arasında boşluk oluştur */
+        margin-top: 20px;
+    }
+    /* Genel yapı ve arka plan */
+#container {
+    background-color: #f4f7fa;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#subheader {
+    font-size: 20px;
+    color: #555;
+    margin-top: 30px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+#form-group {
+    margin-bottom: 20px;
+}
+
+    /* Dropdown list button */
+    #select-style {
+        padding: 8px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        display: block;
+        width: 50%; /* Kutu genişliğini ayarlıyoruz */
+        margin: 0 auto; /* Kutu merkezde konumlanır */
+    }
+
+    /* Öğretim Üyesi Seç yazısının font boyutunu büyütüyoruz */
+    label {
+        font-size: 20px; /* Font boyutunu büyüt */
+        font-weight: bold; /* Yazıyı kalın yap */
+        display: block;
+        margin-bottom: 10px; /* Etiket ile seçim kutusu arasına boşluk ekle */
+    }
+
+
+#table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+#table-bordered {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+#table th,
+#table td {
+    padding: 12px;
+    text-align: center;
+}
+
+    #table thead {
+        background-color: #93d7e8;
+        color: white;
+    }
+
+#table tbody tr:nth-child(odd) {
+    background-color: rgba(0,0,0,0.1);
+}
+
+#table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Action buttons */
+    #btn-primary {
+        padding: 8px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 5px;
+        background-color: #93d7e8;
+    }
+
+#btn-primary:hover {
+    background-color: #0056b3;
+}
+
+#btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+}
+
+#btn-success:hover {
+    background-color: #218838;
+}
+
+#btn-info {
+    background-color: #17a2b8;
+    border: none;
+    color: white;
+}
+
+#btn-info:hover {
+    background-color: #138496;
+}
+
+#btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: black;
+}
+
+#btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Text style and centered cells */
+#text-center {
+    text-align: center;
+}
+
+#mt-4 {
+    margin-top: 20px;
+}
+
+#mt-3 {
+    margin-top: 15px;
+}
+
+#ml-2 {
+    margin-left: 10px;
+}
+
+#colspan-5 {
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+}
+
+</style>
+<div id="container" class="mt-4">
+    <h3 id="header">Randevu Sistemi</h3>
+
+    <div id="form-group" class="form-group">
+        <label>Öğretim Üyesi Seç</label>
+        <form method="get" action="@Url.Action("RandevuAl", "Randevu")">
+            @Html.DropDownList("ogretimUyeId", ViewBag.OgretimUyeleri as IEnumerable<SelectListItem>, "Öğretim Üyesi Seç", new { @class = "form-control", id = "select-style" })
+            <button type="submit" id="btn-primary" class="btn  mt-2">Filtrele</button>
+        </form>
+    </div>
+
+    <h3 id="subheader">Görüşme Zamanları</h3>
+    <table id="table" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tarih</th>
+                <th>Başlangıç Saati</th>
+                <th>Bitiş Saati</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any()) // Görüşmeler varsa
+            {
+                foreach (var gorusme in Model)
+                {
+                    <tr>
+                        <td>@gorusme.GorusmeId</td>
+                        <td>@gorusme.Tarih.ToString("yyyy-MM-dd")</td>
+                        <td>@gorusme.BaslangicSaati</td>
+                        <td>@gorusme.BitisSaati</td>
+                        <td>
+                            @Html.ActionLink("Randevu Al", "RandevuOlustur", new { gorusmeId = gorusme.GorusmeId }, new { @class = "btn btn-success", id = "btn-success" })
+                        </td>
+                    </tr>
+                }
+            }
+            else // Eğer görüşmeler yoksa
+            {
+                <tr>
+                    <td colspan="5" id="colspan-5" class="text-center">Henüz bu öğretim üyesi için uygun görüşme zamanı yok.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="button-container">
+        <a href="@Url.Action("RandevuListele", "Randevu")" class="btn btn-info">Randevuları Listele</a>
+
+        @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+        {
+            <a href="@Url.Action("GorusmeEkle", "Randevu")" class="btn btn-success">Yeni Görüşme Zamanı Ekle</a>
+            <a href="@Url.Action("GorusmeListele", "Randevu")" class="btn btn-success">Görüşme Zamanlarını Görüntüle</a>
+            <a href="@Url.Action("GorusmeDuzenle", "Randevu")" class="btn btn-success">Yeni Görüşme Zamanı Ekle</a>
+        }
+
+        @if (Model != null && Model.Any())
+        {
+            var firstGorusme = Model.First();
+            if (firstGorusme.Randevular != null && firstGorusme.Randevular.Any())
+            {
+                var firstRandevu = firstGorusme.Randevular.First();
+                <a href="@Url.Action("RandevuDuzenle", "Randevu", new { id = firstRandevu.RandevuId })" class="btn btn-warning">Randevuyu Düzenle</a>
+            }
+        }
+    </div>
+
+</div>

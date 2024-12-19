@@ -1,0 +1,181 @@
+﻿﻿@model ProjeYonetim.ViewModels.ViewModel
+
+@{
+    ViewBag.Title = "Bolumler";
+}
+
+
+
+<section class="departments py-5">
+    <div class="container">
+        <p class="text">Pediatri bölümlerimiz hakkında detaylı bilgi alın. Her bölümdeki uzman ekiplerimiz ve hizmetlerimizle çocuk sağlığına tam destek sağlıyoruz.</p>
+
+        <div class="row mt-5">
+            <!-- Çocuk Acil -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/Images/acil.jpeg" class="card-img-top" alt="Çocuk Acil">
+                    <div class="card-body">
+                        <h5 class="card-title">Çocuk Acil</h5>
+                        <p class="card-text">Acil durumlar için hızlı müdahale ve kesintisiz tedavi hizmeti sunulmaktadır.</p>
+                        <ul>
+                            <li>Boş yatak sayısı: <span>@ViewBag.CocukAcilBosYatak</span></li>
+                            <li>Toplam hasta sayısı: <span>@ViewBag.CocukAcilToplamHasta</span></li>
+                            <li>Toplam Yatak sayısı: <span>@ViewBag.CocukAcilToplamYatak</span></li>
+                        </ul>
+                        <!-- Daha fazla bilgi butonuna yönlendirme -->
+                        <a href="#acil" class="link-btn">Daha Fazla Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Çocuk Yoğun Bakım -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/Images/bakim.jpeg" class="card-img-top" alt="Çocuk Yoğun Bakım">
+                    <div class="card-body">
+                        <h5 class="card-title">Çocuk Yoğun Bakım</h5>
+                        <p class="card-text">Hayati tehlike taşıyan durumlar için kesintisiz bakım ve yenilikçi tedavi yöntemleri uygulanmaktadır.</p>
+                        <ul>
+                            <li>Boş yatak sayısı: <span>@ViewBag.CocukBakimBosYatak</span></li>
+                            <li>Toplam hasta sayısı: <span>@ViewBag.CocukBakimToplamHasta</span></li>
+                            <li>Toplam Yatak sayısı: <span>@ViewBag.CocukBakimToplamYatak</span></li>
+                        </ul>
+                        <!-- Daha fazla bilgi butonuna yönlendirme -->
+                        <a href="#bakim" class="link-btn">Daha Fazla Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hematoloji ve Onkoloji -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/Images/hemo.jpeg" class="card-img-top" alt="Hematoloji ve Onkoloji">
+                    <div class="card-body">
+                        <h5 class="card-title">Hematoloji ve Onkoloji</h5>
+                        <p class="card-text">Kan hastalıkları ve kanser tedavisi alanında uzman ekibimiz hizmet vermektedir.</p>
+                        <ul>
+                            <li>Boş yatak sayısı: <span>@ViewBag.OnkolojiBosYatak</span></li>
+                            <li>Toplam hasta sayısı: <span>@ViewBag.OnkolojiToplamHasta</span> </li>
+                            <li>Toplam Yatak sayısı: <span>@ViewBag.OnkolojiToplamYatak</span></li>
+                        </ul>
+                        <a href="#hemo" class="link-btn">Daha Fazla Bilgi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+        {
+            <!-- Begin form (no need for <form> tag here as BeginForm handles it) -->
+            using (Html.BeginForm("Bolumler", "Bolum", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="admin-edit mt-5">
+                    <h5>Admin Panel - Bölüm Bilgilerini Güncelle</h5>
+                    <!-- Admin bilgileri güncellemeleri için form -->
+                    @for (int i = 0; i < Model.BolumDurumNesnesi.Count; i++)
+                    {
+                        var bolum = Model.BolumDurumNesnesi[i];
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h4>@bolum.Bolum.Ad</h4>
+                                @Html.HiddenFor(m => m.BolumDurumNesnesi[i].BolumDurumId)
+
+                                <label>Boş Yatak Sayısı:</label>
+                                @Html.TextBoxFor(m => m.BolumDurumNesnesi[i].BosYatakSayisi, new { @class = "form-control" })
+
+                                <label>Toplam Hasta Sayısı:</label>
+                                @Html.TextBoxFor(m => m.BolumDurumNesnesi[i].HastaSayisi, new { @class = "form-control" })
+
+                                <label>Toplam Yatak Sayısı:</label>
+                                @Html.TextBoxFor(m => m.BolumDurumNesnesi[i].ToplamYatakSayisi, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+
+                    <!-- Admin güncelleme sonrası mesaj -->
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success mt-3">
+                            @TempData["Message"]
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @TempData["Error"]
+                        </div>
+                    }
+                </div>
+            }
+        }
+
+    </div>
+</section>
+<!-- Bölümlere ait detaylar kısmı -->
+<section id="acil" class="department-detail py-5">
+    <div class="container">
+        <h3>Çocuk Acil</h3>
+        <p>
+            Çocuk Acil Servisi, acil tıbbi müdahale gerektiren her yaş grubundaki çocuklara hızla ve güvenli bir şekilde sağlık hizmeti sunmak amacıyla 7/24 aktif olarak çalışmaktadır. Uzman hekimler ve deneyimli sağlık ekibimiz, her tür acil durumda çocukların sağlığını en ön planda tutarak, modern tıbbi ekipmanlar ve gelişmiş tedavi yöntemleriyle hizmet vermektedir.
+
+            Hizmetlerimiz:
+            Acil Müdahale: Her tür acil durumda, hızlı ve etkili müdahalelerle hayat kurtarıcı tedaviler.
+            İleri Düzey Tanı ve Tedavi: Tüm acil vakalarda, en son teknolojilerle tanı koyma ve tedavi sürecini başlatma.
+            Çocuk Dostu Hizmet: Küçük yaştaki çocukların ruhsal ve fiziksel durumlarını göz önünde bulundurarak, onlara dostça ve sakin bir ortamda hizmet verilmesi.
+            7/24 Erişim: Tüm acil çocuk vakaları için gece gündüz hizmet sunulmaktadır.
+            Özel Ekipmanlar: Çocuklara özgü medikal cihazlar ve cihazlarla donatılmış bir acil servis.
+            Neden Çocuk Acil?
+            Çocukların vücut yapıları, yaşlarına ve gelişim süreçlerine göre farklı sağlık gereksinimleri gösterir. Bu yüzden, Çocuk Acil Servisi, sadece yetişkinlerin değil, çocukların da ihtiyaçlarına uygun olarak düzenlenmiştir. Çocuk sağlığına olan hassasiyetimizle, küçük hastalarımıza güvenli, hızlı ve etkili bir tedavi süreci sunuyoruz.
+
+        </p>
+    </div>
+    <section id="bakim" class="department-detail py-5">
+        <div class="container">
+            <h3>Çocuk Yoğun Bakım</h3>
+            <p>
+                Çocuk Yoğun Bakım Ünitesi, hayatı tehdit eden durumlar için yüksek standartlarda tıbbi bakım sunan ve uzman ekiplerin sürekli gözetiminde olan birimimizdir. Çocuk hastalarımızın kritik sağlık durumlarına yönelik sağladığımız kesintisiz bakım, gelişmiş tıbbi cihazlar ve yenilikçi tedavi yöntemleri ile çocukların hızlı ve güvenli iyileşmesini hedefliyoruz.
+
+                Hizmetlerimiz:
+                Yoğun İzlem ve Tedavi: Acil müdahale gerektiren durumlar sonrası hastalarımıza detaylı ve kesintisiz izleme imkanı sağlanır.
+                Özel İzolasyon Odaları: Enfeksiyon riski taşıyan hastalar için özel izolasyon odalarında sağlık hizmeti verilir.
+                İleri Düzey Monitörizasyon: Her türlü hayati fonksiyon, son teknoloji cihazlarla 7/24 izlenir.
+                Multidisipliner Ekip Yaklaşımı: Kardiyolog, nörolog, cerrah, hemşireler ve diğer uzmanlardan oluşan ekip, çocuklarımıza en iyi bakım hizmetini sunar.
+                Aile Desteği: Çocuk hastaların ailelerine, sürecin her aşamasında rehberlik ve psikolojik destek sağlanır.
+                Neden Çocuk Yoğun Bakım?
+                Çocukların yaşamsal fonksiyonları ve tedavi süreçleri, yetişkinlerden farklılık gösterir. Bu sebeple, Çocuk Yoğun Bakım Ünitesi, sadece çocuk hastalara özel olarak dizayn edilmiş, çocuk dostu bir ortamda, sürekli bakım ve takip sunmaktadır.
+
+                Çocuklarımızın güvenliğini sağlamak amacıyla, tüm sağlık hizmetleri birinci sınıf ekipmanlar ve eğitimli sağlık profesyonelleri tarafından yönetilmektedir. Çocuk Yoğun Bakım, yüksek riskli durumlarda bile çocukların en iyi şekilde iyileşmesini sağlamak için gerekli tüm kaynaklara sahiptir.
+
+            </p>
+        </div>
+    </section>
+
+    <section id="hemo" class="department-detail py-5">
+        <div class="container">
+            <h3>Hematoloji ve Onkoloji</h3>
+            <p>
+                Hematoloji ve Onkoloji Bölümü, kan hastalıkları ve kanser tedavisi alanlarında çocuklarımızın sağlığını iyileştirmek için en son tıbbi gelişmeleri ve multidisipliner yaklaşımları bir araya getirir. Alanında uzman doktorlar, hemşireler ve psikologlar ile birlikte, her çocuğa özel tedavi planları oluşturuyoruz. Çocukların hem fiziksel hem de duygusal sağlıklarını iyileştirmeyi hedefleyerek, onları ve ailelerini tedavi süreci boyunca destekliyoruz.
+
+                Hizmetlerimiz:
+                Kanser Tedavisi: Kanser tanısı almış çocuklarımıza, en modern tedavi yöntemleriyle (kemoterapi, immünoterapiler, hedefe yönelik tedavi vb.) destek veriyoruz.
+                Kemik İliği ve Kan Transfüzyonları: Kan hastalıkları ve kanser tedavisinde kullanılan kemik iliği nakli ve kan transfüzyonları ile hastalarımıza tedavi sürecinde yardımcı oluyoruz.
+                Psiko-sosyal Destek: Kanser tedavisindeki çocukların psikolojik ve duygusal ihtiyaçlarını göz önünde bulundurarak, profesyonel psikolojik destek sağlıyoruz.
+                Multidisipliner Tedavi: Çocuk onkolojisi, hematoloji, radyoloji, psikoloji, beslenme ve diğer alanlardan uzmanlar, çocuklarımızın her yönüyle sağlıklarını iyileştirmeyi hedefleyen bir tedavi süreci yürütmektedir.
+                Özel İzolasyon ve Bakım: Bağışıklık sistemi zayıflamış hastalarımız için, özel izolasyon odalarında, yüksek hijyen standartlarında tedavi uygulanmaktadır.
+                Neden Hematoloji ve Onkoloji Bölümü?
+                Kan hastalıkları ve kanser tedavisi, yalnızca fiziksel değil aynı zamanda psikolojik bir süreçtir. Bu süreçte çocuklarımızın yanında olan en önemli faktör, onları en iyi şekilde anlayan ve tedavi sürecinde her an yanlarında olan bir ekibin varlığıdır. Hematoloji ve Onkoloji Bölümü, her çocuğa özel tedavi planları sunarak, en iyi sonuçları elde etmek için çalışmaktadır. Ayrıca, ailelerin ve çocukların tedavi sürecinde yalnız olmadıklarını hissetmeleri, sürecin başarıya ulaşmasında çok önemlidir.
+
+                Hematolojik hastalıklar ve onkolojik tedaviler konusunda derin bilgi ve deneyime sahip ekibimiz, her zaman çocuğunuzun yanındadır. Kanser tedavisi, uzun ve zorlu bir süreç olabilir, fakat doğru tedavi yaklaşımı ve psikolojik destekle çocuklarımız en zorlu hastalıklarla mücadele edebilir.
+            </p>
+        </div>
+    </section>
+</section>
+

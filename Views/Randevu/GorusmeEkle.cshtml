@@ -1,0 +1,34 @@
+﻿@model ProjeYonetim.Models.Gorusme
+
+@{
+    ViewBag.Title = "Gorusmeler";
+}
+
+<div class="container mt-5">
+    <h2>Görüşme Zamanı Ekle</h2>
+    @using (Html.BeginForm("GorusmeEkle", "Randevu", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Öğretim Üyesi</label>
+            @Html.DropDownListFor(m => m.OgrUyeId, ViewBag.OgretimUyeleri as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Tarih</label>
+            @Html.TextBoxFor(m => m.Tarih, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Başlangıç Saati</label>
+            @Html.TextBoxFor(m => m.BaslangicSaati, "{0:hh\\:mm}", new { @type = "time", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Bitiş Saati</label>
+            @Html.TextBoxFor(m => m.BitisSaati, "{0:hh\\:mm}", new { @type = "time", @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    }
+    
+</div>

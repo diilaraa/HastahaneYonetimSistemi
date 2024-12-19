@@ -1,0 +1,120 @@
+﻿@model IEnumerable<ProjeYonetim.Models.AcilDurum>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        table td {
+            border: 1px solid #ddd;
+        }
+
+    h2 {
+        color: #333;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    /* Görsel için CSS */
+    .header-image {
+        width: 100%; /* Görselin tam genişlikte olmasını sağlar */
+        height: 400px; /* Yüksekliği otomatik olarak ayarlar */
+        border-radius: 8px; /* Görselin köşelerini yuvarlatmak */
+        margin-top: 20px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge ekler */
+    }
+
+    /* "Acil Durum Listele" butonuna stil verme */
+    .btn-back {
+        background-color: #28a745;
+        color: white;
+        font-size: 16px;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-back:hover {
+            background-color: #218838; /* Hover efektiyle daha koyu bir yeşil */
+        }
+
+    #liste {
+        margin-bottom: 20px;
+    }
+
+    #listebuton {
+        margin-bottom: 50px;
+        background-color: #e094e9;
+        border: 1px solid #46b8da;
+        color: white;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        text-decoration: none;
+    }
+
+        #listebuton:hover {
+            background-color: #31b0d5;
+            transform: scale(1.05);
+        }
+</style>
+
+<div>
+    <!-- Görüntü Ekleme -->
+    <img src="~/Images/Child_Care.jpeg" alt="Acil Durum Görseli" class="header-image" />
+</div>
+<div>
+    @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+    {
+        <div id="liste">
+            <!-- Yönlendirme Butonu -->
+            <a href="@Url.Action("AcilDurumlarListe", "AcilDurum")" id="listebuton">Acil Durum Listele</a>
+        </div>
+    }
+</div>
+
+
+    <h3>Acil Durumlar</h3>
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Başlık</th>
+                    <th>Açıklama</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Baslik</td>
+                        <td>@item.Aciklama</td>
+                        <td>@item.Tarih.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Henüz acil durum yok.</p>
+    }

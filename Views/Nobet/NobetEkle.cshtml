@@ -1,0 +1,44 @@
+﻿@model ProjeYonetim.Models.Nobet
+
+@{
+    ViewBag.Title = "Nöbet Ekle";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("NobetEkle", "Nobet", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tarih, "Tarih", new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Tarih, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Baslangic, "Başlangıç", new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Baslangic, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+        @Html.ValidationMessageFor(model => model.Baslangic, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bitis, "Bitiş", new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Bitis, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+        @Html.ValidationMessageFor(model => model.Bitis, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AsistanId, "Asistan", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.AsistanId, ViewBag.Asistanlar as SelectList, "Asistan Seçin", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AsistanId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BolumId, "Bölüm", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.BolumId, ViewBag.Bolumler as SelectList, "Bölüm Seçin", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.BolumId, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Nöbeti Ekle</button>
+}

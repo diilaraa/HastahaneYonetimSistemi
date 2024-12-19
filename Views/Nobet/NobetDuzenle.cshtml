@@ -1,0 +1,149 @@
+﻿@model ProjeYonetim.Models.Nobet
+
+@{
+    ViewBag.Title = "Nöbet Düzenle";
+}
+<style>
+    /* Sayfa başlığı */
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Form container */
+    form {
+        width: 80%;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Genel form grup stilleri */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        /* Label stilleri */
+        .form-group label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+    /* Input ve select kutularının stilleri */
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s;
+    }
+
+        /* Input / select odaklanıldığında */
+        .form-control:focus {
+            border-color: #5bc0de;
+            box-shadow: 0 0 5px rgba(91, 192, 222, 0.5);
+        }
+
+    /* Validation mesajları */
+    .validation-message {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    /* Buton stilleri */
+    button[type="submit"], .btn-default {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        transition: background-color 0.3s, transform 0.2s;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    button[type="submit"] {
+        background-color: #5bc0de;
+        color: white;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #31b0d5;
+            transform: scale(1.05);
+        }
+
+    .btn-default {
+        background-color: #ccc;
+        color: white;
+        text-decoration: none;
+    }
+
+        .btn-default:hover {
+            background-color: #bbb;
+            transform: scale(1.05);
+        }
+
+        /* İptal butonunun kenarları */
+        .btn-default:focus, .btn-default:active {
+            outline: none;
+        }
+
+    /* Genel boşluklar */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        margin-top: 30px;
+    }
+
+</style>
+<h2>Nöbet Düzenle</h2>
+
+@using (Html.BeginForm("NobetDuzenle", "Nobet", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tarih)
+        @Html.EditorFor(model => model.Tarih, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+        @Html.ValidationMessageFor(model => model.Tarih)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Baslangic)
+        @Html.EditorFor(model => model.Baslangic, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+        @Html.ValidationMessageFor(model => model.Baslangic)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bitis)
+        @Html.EditorFor(model => model.Bitis, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+        @Html.ValidationMessageFor(model => model.Bitis)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AsistanId, "Asistan")
+        @Html.DropDownListFor(model => model.AsistanId, (SelectList)ViewBag.Asistanlar, "- Seçin -", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AsistanId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BolumId, "Bölüm")
+        @Html.DropDownListFor(model => model.BolumId, (SelectList)ViewBag.Bolumler, "- Seçin -", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.BolumId)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <a href="@Url.Action("NobetListele", "Nobet")" class="btn btn-default">İptal</a>
+    </div>
+}

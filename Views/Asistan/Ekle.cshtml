@@ -1,0 +1,107 @@
+﻿@model ProjeYonetim.Models.Asistan
+
+@{
+    ViewBag.Title = "Asistan Üyesi Ekle";
+}
+<style>
+    /* Genel Sayfa Stil Düzenlemeleri */
+    .container {
+        max-width: 800px;
+        margin-top: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #495057;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(38, 143, 255, .5);
+        }
+
+    /* Buton stil düzenlemeleri */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    /* Title */
+    h3 {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .text-center {
+        margin-bottom: 40px;
+    }
+
+    /* Genel Arka Plan ve Box Shadow */
+    #container {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    }
+</style>
+
+
+@if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+{
+    <div id="container" class="container mt-5">
+        <h3 class="text-center mb-4">Yeni Öğretim Üyesi Ekle</h3>
+
+        @using (Html.BeginForm("Ekle", "Asistan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="Ad">Ad</label>
+                @Html.TextBoxFor(model => model.Ad, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Soyad">Soyad</label>
+                @Html.TextBoxFor(model => model.Soyad, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Mail">E-posta</label>
+                @Html.TextBoxFor(model => model.Mail, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Telefon">Telefon</label>
+                @Html.TextBoxFor(model => model.Telefon, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="BolumId">Bölüm</label>
+                @Html.DropDownListFor(model => model.BolumId,
+                    new SelectList(ViewBag.Bolumler, "BolumId", "Ad"),
+                    new { @class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-4">Ekle</button>
+        }
+    </div>
+}
+
+
+
+

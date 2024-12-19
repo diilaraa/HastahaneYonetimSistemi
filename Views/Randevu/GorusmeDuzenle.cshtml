@@ -1,0 +1,75 @@
+﻿@model ProjeYonetim.Models.Gorusme
+
+@{
+    ViewBag.Title = "Görüşme Düzenle";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Görüşme Bilgileri</h4>
+    <hr />
+
+    @Html.HiddenFor(model => model.GorusmeId)
+
+    <!-- Öğretim Üyesi Seçimi -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.OgrUyeId, "Öğretim Üyesi", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OgrUyeId,
+                ViewBag.OgretimUyeleri as SelectList,
+                "Öğretim Üyesi Seçin",
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OgrUyeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <!-- Tarih Seçimi -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tarih, "Tarih", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Tarih,
+                "{0:yyyy-MM-dd}",
+                new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Başlangıç Saati Seçimi -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.BaslangicSaati, "Başlangıç Saati", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(
+           model => model.BaslangicSaati,
+           "{0:hh\\:mm}", // Saat ve dakikayı doğru formatta gösterir
+           new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.BaslangicSaati, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Bitiş Saati Seçimi -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.BitisSaati, "Bitiş Saati", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.BitisSaati,
+                "{0:hh\\:mm}",
+                new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.BitisSaati, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <!-- Kaydet ve İptal Butonları -->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            @Html.ActionLink("İptal", "GorusmeListele", new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+}

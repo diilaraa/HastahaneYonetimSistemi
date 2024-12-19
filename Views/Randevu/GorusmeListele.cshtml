@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjeYonetim.Models.Gorusme>
+
+@{
+    ViewBag.Title = "Görüşmeleri Listele";
+}
+
+<div class="container mt-4">
+    <h2>@ViewBag.Title</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Öğretim Üyesi</th>
+                <th>Tarih</th>
+                <th>Başlangıç Saati</th>
+                <th>Bitiş Saati</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var gorusme in Model)
+                {
+                    <tr>
+                        <td>@gorusme.GorusmeId</td>
+                        <td>@gorusme.OgretimUye.Unvan @gorusme.OgretimUye.Ad @gorusme.OgretimUye.Soyad</td>
+                        <td>@gorusme.Tarih.ToString("yyyy-MM-dd")</td>
+                        <td>@gorusme.BaslangicSaati.ToString(@"hh\:mm")</td>
+                        <td>@gorusme.BitisSaati.ToString(@"hh\:mm")</td>
+                        <td>
+                            <a href="@Url.Action("GorusmeDuzenle", "Randevu", new { id = gorusme.GorusmeId })" class="btn btn-warning">Düzenle</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center">Henüz hiçbir görüşme kaydı bulunmamaktadır.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Yeni Görüşme Zamanı Ekleme Butonu -->
+    <a href="@Url.Action("GorusmeEkle", "Randevu")" class="btn btn-success">Yeni Görüşme Zamanı Ekle</a>
+</div>

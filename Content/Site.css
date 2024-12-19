@@ -1,0 +1,529 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Genel Ayarlar */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #93d7e8;
+    padding: 10px 0;
+    display: flex; /* Yatay düzen için flexbox */
+    justify-content: space-between; /* İçerikleri iki uçta hizalar */
+    align-items: center; /* Dikeyde ortalama */
+    color: #000; /* Header içeriği için yazı rengi */
+}
+
+/* Logo ve Başlık */
+.logo {
+    display: flex; /* Logo ve yazıyı yatay hizalar */
+    align-items: center; /* Dikeyde ortalar */
+}
+
+    .logo img {
+        max-height: 60px; /* Logo yüksekliği */
+        margin-right: 10px; /* Logo ile yazı arasında boşluk */
+    }
+
+    .logo h1 {
+        font-size: 1.5rem; /* Yazı boyutu */
+        margin: 0; /* Boşlukları kaldır */
+        font-weight: bold;
+    }
+/*Header*/
+/* Navbar */
+.nav {
+    height: 100px;
+    display: flex; /* Yatay düzen */
+    gap: 10px; /* Öğeler arasında boşluk */
+    flex-wrap: nowrap; /* Satır atlamasını engelle */
+}
+
+    .nav .nav-item a {
+        margin-top: 25px;
+        color: #000; /* Siyah renk */
+        text-decoration: none; /* Alt çizgiyi kaldır */
+        font-size: 1.45rem; /* Yazı boyutu */
+        white-space: nowrap; /* Yazının satır atlamasını engelle */
+    }
+
+        .nav .nav-item a:hover {
+            color: #007bff; /* Üzerine gelince farklı renk */
+            text-decoration: underline; /* Alt çizgi */
+        }
+/* Footer */
+footer a:hover {
+    text-decoration: underline;
+}
+/* Footer Rengi */
+footer {
+    background-color: #93d7e8;
+    color: #000; /* Footer içeriği için yazı rengi */
+    padding: 15px 0;
+    text-align: center;
+}
+/* Hero Section */
+
+.hero {
+    background-image: url('/Images/ped.jpeg');
+    background-size: cover; /* Resmi kapsayıcıya tam sığdır */
+    background-position: center; /* Resmin ortasını yerleştir */
+    background-repeat: no-repeat; /* Resmi tekrar ettirme */
+
+
+    width: 100%; /* Tam genişlik */
+    height: 500px; /* Sabit yükseklik */
+    margin: 0 auto; /* Hero bloğunu yatayda ortala */
+    padding: 0 20px; /* Sağ ve sol boşluk ekle */
+
+    display: flex; /* İçeriği ortalamak için flexbox kullan */
+    flex-direction: column;
+    justify-content: center; /* Dikey ortalama */
+    align-items: center; /* Yatay ortalama */
+    color: #333; /* Yazı rengi */
+    border-radius: 10px; /* Köşeleri yuvarlak yap (isteğe bağlı) */
+}
+
+
+    .hero h2 {
+        margin-bottom: 1rem;
+    }
+
+/* Features Section */
+.image-box {
+    width: 250px; /* Kutunun genişliği */
+    height: 250px; /* Kutunun yüksekliği */
+    border: 2px solid #ddd; /* Çerçeve */
+    border-radius: 10px; /* Köşeleri yuvarlat */
+    overflow: hidden; /* Kutunun dışına taşan içerikleri gizle */
+    display: flex; /* İçeriği kutunun ortasına yerleştirmek için */
+    justify-content: center; /* Yatay ortalama */
+    align-items: center; /* Dikey ortalama */
+    margin: 0 auto 1rem; /* Ortala ve alt boşluk ekle */
+}
+
+    .image-box img {
+        width: 100%; /* Görüntüyü kutuya sığdır */
+        height: 100%; /* Görüntüyü kutuya sığdır */
+        object-fit: cover; /* Görüntüyü kırparak kutuya sığdır */
+    }
+
+
+    .image-box:hover {
+        border-color: #ef7251; /* Hover: Çerçeve mavi */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
+    }
+
+
+/* OgrUye - Genel Ayarlar */
+/* Asistan Sayfası Kapsayıcısı */
+#container {
+    max-width: 1500px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+    /* Title styles */
+    #container h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333; /* Green color for the title */
+        margin-bottom: 30px;
+    }
+
+
+    #container .row {
+        display: flex;
+        gap: 10px; /* Space between cards */
+        justify-content: space-between; /* Ensure space is distributed */
+    }
+
+    /* Individual card styles */
+    #container .card {
+        width: 400px; /* Kutunun genişliği */
+        height: 550px; /* Kutunun yüksekliği */
+        border: 2px solid #ddd; /* Çerçeve */
+        border-radius: 15px; /* Köşeleri yuvarlat */
+        overflow: hidden; /* Kutunun dışına taşan içerikleri gizle */
+        display: flex; /* İçeriği kutunun ortasına yerleştirmek için */
+        justify-content: center; /* Yatay ortalama */
+        align-items: center; /* Dikey ortalama */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+        margin: 0 auto 20px; /* Ortala ve alt boşluk */
+    }
+
+    /* Card image */
+    #container .card-img-top {
+        max-width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 20px auto;
+        display: block;
+    }
+
+    /* Card title */
+    #container .card-title {
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    /* Card text */
+    #container .card-text {
+        font-size: 1rem;
+        color: #555;
+        margin: 5px 20px;
+    }
+
+        /* Strong tags for emphasizing email and phone */
+        #container .card-text strong {
+            color: #333;
+        }
+
+    /* Footer card - smooth hover effect */
+    #container .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+/* Bölümler - Genel Ayarlar */
+.departments .container .text {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Card Kutucuklarının Düzenlenmesi */
+.departments .card {
+    width: 400px; /* Kutunun genişliği */
+    height: 100px; /* Kutunun yüksekliği */
+    border: 2px solid #ddd; /* Çerçeve */
+    border-radius: 15px; /* Köşeleri yuvarlat */
+    overflow: hidden; /* Kutunun dışına taşan içerikleri gizle */
+    display: flex; /* İçeriği kutunun ortasına yerleştirmek için */
+    justify-content: center; /* Yatay ortalama */
+    align-items: center; /* Dikey ortalama */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    margin: 0 auto 20px; /* Ortala ve alt boşluk */
+    height: 100%; /* Kartların yüksekliği eşit olsun */
+}
+
+    /* Resim Ayarları */
+    .departments .card img {
+        width: 40%; /* Görüntüyü kutuya sığdır */
+        height: 40%; /* Görüntüyü kutuya sığdır */
+        object-fit: cover; /* Görüntüyü kırparak kutuya sığdır */
+    }
+
+/* Card İçerik Ayarları */
+.departments .card-body {
+    display: flex;
+    flex-direction: column; /* İçeriği dikey hizala */
+    justify-content: space-between; /* İçerik arasında boşluk */
+    align-items: center; /* Ortala */
+    padding: 20px;
+    text-align: center;
+}
+
+.departments .card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.departments .card-text {
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.departments .card-body ul {
+    color: #333;
+    font-size: 1.1rem;
+    list-style-type: disc;
+    padding-left: 20px;
+    text-align: left; /* Listeyi sola hizala */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%; /* Listenin genişliği tam olsun */
+}
+
+
+
+/* Bolumler Admin Panel */
+.admin-edit {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+    /* Başlık stili */
+    .admin-edit .row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 20px;
+    }
+
+    .admin-edit .col-md-4 {
+        flex: 0 0 300px; /* Sütun genişliği sabitle */
+        min-width: 300px;
+    }
+
+    .admin-edit h5 {
+        font-size: 1.8rem;
+        color: #004085;
+        font-weight: bold;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+    }
+
+    /* Her bölüm için başlık stili */
+    .admin-edit .col-md-4 h4 {
+        font-size: 1.5rem;
+        color: #0056b3;
+        margin-bottom: 15px;
+    }
+
+    /* Etiket ve giriş alanları düzeni */
+    .admin-edit label {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #555;
+        display: block;
+    }
+
+    .admin-edit input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .admin-edit input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    /* Form içindeki satırlar */
+    .admin-edit .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        gap: 20px;
+    }
+
+    /* Buton stili */
+    .admin-edit .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .admin-edit .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 85, 179, 0.3);
+        }
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+    .departments .col-md-4 {
+        flex: 0 0 48%; /* Daha küçük ekranlarda 2'li hizalama */
+    }
+}
+
+@media (max-width: 576px) {
+    .departments .col-md-4 {
+        flex: 0 0 100%; /* Mobil ekranlarda tekli hizalama */
+    }
+}
+
+/* Bağlantı gibi görünecek şekilde stil verilen "buton" */
+.link-btn {
+    display: inline-block; /* Elementi blok yap, yatayda sıralansın */
+    padding: 12px 25px; /* İç boşluk, butonun boyutlarını ayarlar */
+    font-size: 1rem; /* Yazı boyutunu belirle */
+    font-weight: bold; /* Yazıyı kalınlaştır */
+    text-align: center;
+    color: white; /* Yazı rengi */
+    background-color: #93d7e8; /* Arka plan rengi */
+    border: 2px solid; /* Kenarlık rengi */
+    border-radius: 5px; /* Köşeleri yuvarlat */
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    transition: all 0.3s ease; /* Yumuşak geçiş efekti */
+    cursor: pointer; /* Fare pointer'ı */
+    margin-top: 15px; /* Yukarıdan boşluk */
+}
+
+    /* Bağlantının üzerine gelindiğinde (hover durumu) */
+    .link-btn:hover {
+        background-color: #ef7251; /* Arka plan rengini koyulaştır */
+        border-color: #edf2f3; /* Kenarlık rengini koyulaştır */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge ekle */
+    }
+
+    /* Bağlantıya tıklanıldığında (active durumu) */
+    .link-btn:active {
+        background-color: #004085; /* Tıklama anındaki arka plan rengi */
+        border-color: #004085; /* Kenarlık rengini değiştir */
+        transform: translateY(2px); /* Tıklama anındaki "basma" efekti */
+    }
+
+
+/* Bölüm Detayları - Premium Tasarım */
+.department-detail {
+    background: #ffffff; /* Beyaz arka plan */
+    padding: 60px 30px; /* Daha geniş iç boşluk */
+    margin-top: 40px; /* Yukarıdan boşluk */
+    border-radius: 20px; /* Yumuşak köşeler */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Yumuşak gölge */
+    position: relative;
+    overflow: hidden; /* Kenardan taşmayı önle */
+    width: 100%;
+}
+
+    /* Dekoratif Gradient Çizgi */
+    .department-detail::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: linear-gradient(to right, #ff6f61, #42a5f5); /* Çarpıcı renk geçişi */
+    }
+
+    /* Başlık */
+    .department-detail h3 {
+        font-size: 2rem; /* Daha büyük ve etkileyici */
+        color: #333; /* Güçlü bir renk */
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 800; /* Daha kalın ve dikkat çekici */
+        letter-spacing: 1px; /* Harf aralığı */
+        position: relative;
+    }
+
+        .department-detail h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #ff6f61; /* Vurgu rengi */
+            border-radius: 10px;
+        }
+
+    /* Paragraf */
+    .department-detail p {
+        font-size: 1rem; /* Okunaklı bir yazı boyutu */
+        line-height: 1.8; /* Daha geniş satır aralığı */
+        color: #555; /* Hafif gri tonlar */
+        margin: 0 auto 30px; /* Ortalanmış ve alt boşluklu */
+        max-width: 900px; /* Metni sınırlandır */
+        text-align: center; /* Ortala */
+    }
+
+    /* Liste ile Görsel ve Bilgi */
+    .department-detail ul {
+        font-size: 1.4rem; /* Daha büyük ve etkileyici */
+        color: #333; /* Güçlü bir renk */
+        display: flex;
+        justify-content: space-around;
+        margin: 30px 0 0;
+        padding: 0;
+        list-style: none; /* Varsayılan liste işaretlerini kaldır */
+        gap: 30px;
+        flex-wrap: wrap; /* Küçük ekranlarda kırılabilir */
+    }
+
+
+
+@media (max-width: 768px) {
+    #academic-staff .col-md-4 {
+        max-width: 100%;
+    }
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .department-detail ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+        .department-detail ul li {
+            width: 100%;
+        }
+}
+
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+    .departments .col-md-4 {
+        flex: 0 0 48%; /* Daha küçük ekranlarda 2'li hizalama */
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .departments .col-md-4 {
+        flex: 0 0 100%; /* Mobil ekranlarda tekli hizalama */
+    }
+}

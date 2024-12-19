@@ -1,0 +1,19 @@
+﻿@model ProjeYonetim.Models.Asistan
+
+@{
+    ViewBag.Title = "Asistan Sil";
+}
+
+<div id="container" class="container mt-5">
+    <h3 class="text-center mb-4">Asistan Sil</h3>
+    <div class="alert alert-danger">
+        <strong>Uyarı!</strong> Bu işlem geri alınamaz. "@Model.Ad @Model.Soyad" adlı asistanı silmek istediğinizden emin misiniz?
+    </div>
+
+    @using (Html.BeginForm("Sil", "Asistan", new { id = Model.AsistanID }, FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-danger btn-block">Evet, Sil</button>
+        <a href="@Url.Action("Asistan", "Asistan")" class="btn btn-secondary btn-block mt-2">Vazgeç</a>
+    }
+
+</div>

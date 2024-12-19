@@ -1,0 +1,28 @@
+﻿@model ProjeYonetim.Models.AcilDurum
+
+@{
+    ViewBag.Title = "Acil Durum Sil";
+}
+
+<h2>Acil Durumu Sil</h2>
+
+<p>
+    <strong>Başlık:</strong> @Model.Baslik
+</p>
+<p>
+    <strong>Açıklama:</strong> @Model.Aciklama
+</p>
+<p>
+    <strong>Tarih:</strong> @Model.Tarih.ToString("yyyy-MM-dd HH:mm:ss")
+</p>
+
+<h4>Bu acil durumu silmek istediğinizden emin misiniz?</h4>
+
+@using (Html.BeginForm("Sil", "AcilDurum", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.AcilDurumId)
+
+    <button type="submit" class="btn btn-danger">Evet, Sil</button>
+    <a href="@Url.Action("AcilDurumlarListe", "AcilDurum")" class="btn btn-default">Hayır, Vazgeç</a>
+}

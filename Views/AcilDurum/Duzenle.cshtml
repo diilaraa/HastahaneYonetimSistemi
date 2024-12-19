@@ -1,0 +1,37 @@
+﻿@model ProjeYonetim.Models.AcilDurum
+
+@{
+    ViewBag.Title = "Acil Durum Düzenle";
+}
+
+<h2>Acil Durum Düzenle</h2>
+
+@using (Html.BeginForm("Duzenle", "AcilDurum", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Baslik)
+        @Html.TextBoxFor(model => model.Baslik, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Baslik, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Aciklama)
+        @Html.TextAreaFor(model => model.Aciklama, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(model => model.Aciklama, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tarih)
+        @Html.TextBoxFor(model => model.Tarih, "{0:yyyy-MM-dd HH:mm:ss}", new { @class = "form-control", type = "datetime-local" })
+        @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-success">Güncelle</button>
+    <a href="@Url.Action("AcilDurumlarListe", "AcilDurum")" class="btn btn-default">Vazgeç</a>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

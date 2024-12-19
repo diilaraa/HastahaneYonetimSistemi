@@ -1,0 +1,47 @@
+﻿@model ProjeYonetim.Models.Randevu
+
+@{
+    ViewBag.Title = "Randevu Sil";
+}
+
+<div class="container mt-4">
+    <h2>Randevuyu Sil</h2>
+
+    <p>Randevuyu silmek üzeresiniz. Lütfen aşağıdaki bilgileri kontrol edin.</p>
+
+    <div class="alert alert-warning">
+        <strong>Uyarı:</strong> Bu işlem geri alınamaz.
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Randevu ID</th>
+            <td>@Model.RandevuId</td>
+        </tr>
+        <tr>
+            <th>Öğretim Üyesi</th>
+            <td>@Model.OgretimUye.Ad @Model.OgretimUye.Soyad</td>
+        </tr>
+        <tr>
+            <th>Asistan</th>
+            <td>@Model.Asistan.Ad @Model.Asistan.Soyad</td>
+        </tr>
+        <tr>
+            <th>Tarih</th>
+            <td>@Model.GorusmeZamani.Tarih.ToString("yyyy-MM-dd")</td>
+        </tr>
+        <tr>
+            <th>Başlangıç Saati</th>
+            <td>@Model.GorusmeZamani.BaslangicSaati</td>
+        </tr>
+        <tr>
+            <th>Bitiş Saati</th>
+            <td>@Model.GorusmeZamani.BitisSaati</td>
+        </tr>
+    </table>
+
+    <form method="post" action="@Url.Action("RandevuSil", new { id = Model.RandevuId })">
+        <button type="submit" class="btn btn-danger">Evet, Randevuyu Sil</button>
+        <a href="@Url.Action("RandevuListele")" class="btn btn-secondary">Hayır, İptal Et</a>
+    </form>
+</div>

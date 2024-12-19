@@ -1,0 +1,53 @@
+﻿@model ProjeYonetim.Models.Randevu
+
+@{
+    ViewBag.Title = "Randevu Düzenle";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Randevu Bilgileri</h4>
+        <hr />
+
+        @Html.HiddenFor(model => model.RandevuId)
+
+        <!-- Öğretim Üyesi Seçimi -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.OgrUyeId, "Öğretim Üyesi", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.OgrUyeId,
+                    ViewBag.OgretimUyeleri as SelectList,
+                    "Öğretim Üyesi Seçin",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OgrUyeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Görüşme Zamanı Seçimi -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.GorusmeId, "Görüşme Zamanı", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.GorusmeId,
+                    ViewBag.GorusmeZamanlari as SelectList,
+                    "Görüşme Zamanı Seçin",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GorusmeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Kaydet ve İptal Butonları -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+                @Html.ActionLink("İptal", "RandevuListele", new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+
+

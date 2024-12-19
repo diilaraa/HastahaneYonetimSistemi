@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjeYonetim.Models.Randevu>
+
+<div class="container mt-4">
+    <h2>Randevular</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Öğretim Üyesi</th>
+                <th>Asistan</th>
+                <th>Tarih</th>
+                <th>Başlangıç Saati</th>
+                <th>Bitiş Saati</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var randevu in Model)
+            {
+                <tr>
+                    <td>@randevu.RandevuId</td>
+                    <td>@randevu.OgretimUye.Ad @randevu.OgretimUye.Soyad</td>
+                    <td>@randevu.Asistan.Ad @randevu.Asistan.Soyad</td>
+                    <td>@randevu.GorusmeZamani.Tarih.ToString("yyyy-MM-dd")</td>
+                    <td>@randevu.GorusmeZamani.BaslangicSaati</td>
+                    <td>@randevu.GorusmeZamani.BitisSaati</td>
+                    <td>
+
+                        @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+                        {
+                            @Html.ActionLink("Düzenle", "RandevuDuzenle", new { id = randevu.RandevuId }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Sil", "RandevuSil", new { id = randevu.RandevuId }, new { @class = "btn btn-danger", onclick = "return confirm('Randevuyu silmek istediğinizden emin misiniz?')" })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

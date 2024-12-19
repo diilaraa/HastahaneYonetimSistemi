@@ -1,0 +1,40 @@
+﻿@model ProjeYonetim.Models.Randevu
+@{
+    ViewBag.Title = "Randevu Oluştur";
+}
+
+<div class="container mt-4">
+    <h2>Randevu Oluştur</h2>
+
+    @using (Html.BeginForm("RandevuOlustur", "Randevu", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.GorusmeId) <!-- Görüşme ID'sini saklıyoruz -->
+        @Html.HiddenFor(m => m.OgrUyeId) <!-- Öğretim Üyesi ID'sini saklıyoruz -->
+
+        <div class="form-group">
+            <label>Asistan</label>
+            @Html.DropDownListFor(m => m.AsistanId, // Burada AsistanId model ile ilişkilendiriliyor
+                new SelectList(ViewBag.Asistanlar, "AsistanId", "AdSoyad"),
+                "Asistan Seçin",
+                new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-success">Randevu Kaydet</button>
+
+        <div>
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success mt-3">
+                    @TempData["Message"]
+                </div>
+            }
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @TempData["Error"]
+                    </div>
+                }
+            </div>
+        
+    }
+</div>

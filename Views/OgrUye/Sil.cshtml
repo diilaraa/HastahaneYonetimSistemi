@@ -1,0 +1,19 @@
+﻿@model ProjeYonetim.Models.OgretimUye
+
+@{
+    ViewBag.Title = "Öğretim Üyesi Sil";
+}
+
+<div id="container" class="container mt-5">
+    <h3 class="text-center mb-4">Öğretim Üyesini Sil</h3>
+    <div class="alert alert-danger">
+        <strong>Uyarı!</strong> Bu işlem geri alınamaz. "@Model.Ad @Model.Soyad" adlı öğretim üyesini silmek istediğinizden emin misiniz?
+    </div>
+
+    @using (Html.BeginForm("ConfirmSil", "OgrUye", new { id = Model.OgrUyeID }, FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-danger btn-block">Evet, Sil</button>
+        <a href="@Url.Action("OgrUye", "OgrUye")" class="btn btn-secondary btn-block mt-2">Vazgeç</a>
+    }
+
+</div>

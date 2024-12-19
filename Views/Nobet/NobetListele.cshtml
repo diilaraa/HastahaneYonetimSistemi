@@ -1,0 +1,149 @@
+﻿@model IEnumerable<ProjeYonetim.Models.Nobet>
+
+<style>
+    /* Sayfa başlığı */
+    h2 {
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Tablo stili */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        table thead {
+            background-color: #5bc0de;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            font-weight: bold;
+            font-size: 20px;
+            width: 30px;
+            height:50px;
+        }
+
+        table td {
+            font-size: 18px;
+        }
+
+
+
+    /* Butonlar */
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: black;
+    }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+    /* Bağlantı Stili */
+    .btn:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Tablo düğmeleri hizalama */
+    .table-actions {
+        text-align: center;
+        padding-top: 20px;
+        margin-bottom: 50px;
+    }
+    #listebuton {
+        background-color: #e094e9;
+        border: 1px solid #46b8da;
+        color: white;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        text-decoration: none;
+    }
+
+        #listebuton:hover {
+            background-color: #31b0d5;
+            transform: scale(1.05);
+        }
+</style>
+
+<h2>Nöbet Listesi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tarih</th>
+            <th>Başlangıç</th>
+            <th>Bitiş</th>
+            <th>Asistan</th>
+            <th>Bölüm</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Tarih.ToString("yyyy-MM-dd")</td>
+                <td>@item.Baslangic.ToString("HH:mm")</td>
+                <td>@item.Bitis.ToString("HH:mm")</td>
+                <td>@item.Asistan.Ad @item.Asistan.Soyad</td>
+                <td>@item.Bolum.Ad</td>
+                <td>
+                    @Html.ActionLink("Düzenle", "NobetDuzenle", new { id = item.NobetId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Sil", "NobetSil", new { id = item.NobetId },
+                        new { @class = "btn btn-danger", onclick = "return confirm('Bu nöbeti silmek istediğinize emin misiniz?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="table-actions">
+    <a href="@Url.Action("NobetTakvim", "Nobet")"id="listebuton" >Takvim</a>
+    <a href="@Url.Action("NobetEkle", "Nobet")" id="listebuton">Nöbet Ekle</a>
+</div>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "OgrUye";
+    var bolumler = ViewBag.Bolumler as List<ProjeYonetim.Models.Bolum>;
+}
+@model ProjeYonetim.ViewModels.ViewModel
+
+
+
+<div id="container">
+    <h3 class="text-center mb-4">Öğretim Üyelerimiz</h3>
+    <div class="row">
+        @foreach (var item in Model.OgrUyeNesnesi)
+        {
+            // Asistan'ın BolumId'si ile eşleşen bölüm bulunuyor
+            var bolum = bolumler.FirstOrDefault(b => b.BolumId == item.BolumId);
+
+            // Fotoğraf adını oluşturmak (örneğin: Asistan1.jpg)
+            var fotoğrafAdi = "ogr" + (Model.OgrUyeNesnesi.IndexOf(item) + 1) + ".jpg";
+
+            <div class="card">
+                <!-- OgrUye için ilgili fotoğrafı göster -->
+                <img src="~/Images/@fotoğrafAdi" alt="@item.Ad @item.Soyad" class="card-img-top rounded-circle mx-auto d-block mt-4">
+
+                <h5 class="card-title">@item.Unvan @item.Ad @item.Soyad</h5> <!-- adı ve soyadı -->
+                <p class="card-text"><strong>Email:</strong> @item.Mail</p> <!--  e-maili -->
+                <p class="card-text"><strong>Telefon:</strong> @item.Telefon</p> <!-- telefonu -->
+                <p class="card-text"><strong>Bölüm:</strong>@(bolum != null ? bolum.Ad : "Bölüm Bulunamadı")</p> <!-- bölüm adı -->
+                @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+                {
+                    <!-- Silme işlemi için bağlantı -->
+                    <a href="@Url.Action("Sil", "OgrUye", new { id = @item.OgrUyeID })" class="btn btn-danger mt-1">Sil</a>
+                    <!-- Düzenleme işlemi için bağlantı -->
+                    <a href="@Url.Action("Edit", "OgrUye", new { id = @item.OgrUyeID })" class="btn btn-warning mt-1">Düzenle</a>
+                }
+            </div>
+        }
+
+    </div>
+    @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+    {
+        <!-- Yeni
+             Öğretim Üyesi Ekle Butonu -->
+    <div class="mt-5 text-center">
+        <a href="@Url.Action("Ekle", "OgrUye")" class="btn btn-success">Yeni Öğretim Üyesi Ekle</a>
+       
+    </div>
+
+     }
+
+
+</div>
+
+
